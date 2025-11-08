@@ -94,6 +94,9 @@ def create_csv_reports(df):
     print("CREATING CSV REPORTS")
     print("="*80)
     
+    import os
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
     # 1. Person-wise duty schedule
     person_schedule = []
     for name in sorted(df['Name'].unique()):
@@ -108,7 +111,8 @@ def create_csv_reports(df):
             })
     
     person_df = pd.DataFrame(person_schedule)
-    person_df.to_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/duty_schedule_by_person.csv', index=False)
+    person_file = os.path.join(current_dir, 'duty_schedule_by_person.csv')
+    person_df.to_csv(person_file, index=False)
     print("✅ Created: duty_schedule_by_person.csv")
     
     # 2. Date-wise duty schedule
@@ -125,7 +129,8 @@ def create_csv_reports(df):
             })
     
     date_df = pd.DataFrame(date_schedule)
-    date_df.to_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/duty_schedule_by_date.csv', index=False)
+    date_file = os.path.join(current_dir, 'duty_schedule_by_date.csv')
+    date_df.to_csv(date_file, index=False)
     print("✅ Created: duty_schedule_by_date.csv")
     
     # 3. Daily summary
@@ -144,7 +149,8 @@ def create_csv_reports(df):
         })
     
     summary_df = pd.DataFrame(daily_summary)
-    summary_df.to_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/daily_duty_summary.csv', index=False)
+    summary_file = os.path.join(current_dir, 'daily_duty_summary.csv')
+    summary_df.to_csv(summary_file, index=False)
     print("✅ Created: daily_duty_summary.csv")
     
     # 4. Employee work hours (approximate)
@@ -172,11 +178,14 @@ def create_csv_reports(df):
     
     if work_hours:
         hours_df = pd.DataFrame(work_hours)
-        hours_df.to_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/employee_work_hours.csv', index=False)
+        hours_file = os.path.join(current_dir, 'employee_work_hours.csv')
+        hours_df.to_csv(hours_file, index=False)
         print("✅ Created: employee_work_hours.csv")
 
 if __name__ == "__main__":
-    csv_file_path = "/Users/rubeenakhan/Desktop/PYTHON CODE/Untitled spreadsheet - Sheet3.csv"
+    import os
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_file_path = os.path.join(current_dir, "Untitled spreadsheet - Sheet3.csv")
     
     if os.path.exists(csv_file_path):
         analyze_duty_schedule(csv_file_path)

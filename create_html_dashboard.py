@@ -8,9 +8,11 @@ from datetime import datetime
 def create_html_dashboard():
     """Create an HTML dashboard with interactive charts"""
     
-    # Load data
-    df = pd.read_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/Untitled spreadsheet - Sheet3.csv', 
-                    names=['ID', 'Name', 'Status', 'DateTime'])
+    # Load data - use relative paths
+    import os
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_file = os.path.join(current_dir, 'Untitled spreadsheet - Sheet3.csv')
+    df = pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime'])
     
     # Convert DateTime to datetime object
     df['DateTime'] = pd.to_datetime(df['DateTime'])
@@ -21,7 +23,8 @@ def create_html_dashboard():
     
     # Load work hours data
     try:
-        work_hours_df = pd.read_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/employee_work_hours.csv')
+        work_hours_file = os.path.join(current_dir, 'employee_work_hours.csv')
+        work_hours_df = pd.read_csv(work_hours_file)
     except:
         work_hours_df = None
     
@@ -291,7 +294,8 @@ def create_html_dashboard():
     """
     
     # Save HTML file
-    with open('/Users/rubeenakhan/Desktop/PYTHON CODE/duty_dashboard.html', 'w') as f:
+    output_file = os.path.join(current_dir, 'duty_dashboard.html')
+    with open(output_file, 'w') as f:
         f.write(html_content)
     
     print("✅ HTML Dashboard created: duty_dashboard.html")

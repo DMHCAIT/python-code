@@ -37,8 +37,10 @@ st.markdown("""
 def load_data():
     """Load the duty schedule data"""
     try:
-        df = pd.read_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/Untitled spreadsheet - Sheet3.csv', 
-                        names=['ID', 'Name', 'Status', 'DateTime'])
+        import os
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_file = os.path.join(current_dir, 'Untitled spreadsheet - Sheet3.csv')
+        df = pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime'])
         
         df['DateTime'] = pd.to_datetime(df['DateTime'])
         df['Date'] = df['DateTime'].dt.date
@@ -140,9 +142,9 @@ def main():
                     return 'font-weight: bold;'
                 return ''
             
-            styled_df = schedule_df.style.applymap(highlight_duty, subset=['Duty On', 'Duty Off'])
+            styled_df = schedule_df.style.map(highlight_duty, subset=['Duty On', 'Duty Off'])
             
-            st.dataframe(styled_df, use_container_width=True, hide_index=True)
+            st.dataframe(styled_df, width='stretch', hide_index=True)
             
             # Download button
             csv = schedule_df.to_csv(index=False)
@@ -190,7 +192,7 @@ def main():
             st.markdown("### 🕒 Recent Activity (Last 5 records)")
             recent_records = employee_data.tail(5)[['Date', 'Status', 'Time']].copy()
             recent_records['Date'] = recent_records['Date'].astype(str)
-            st.dataframe(recent_records, use_container_width=True, hide_index=True)
+            st.dataframe(recent_records, width='stretch', hide_index=True)
             
         else:
             st.warning(f"No duty records found for employee: {selected_employee}")

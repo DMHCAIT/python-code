@@ -41,9 +41,11 @@ st.markdown("""
 def load_data():
     """Load and process the duty schedule data"""
     try:
-        # Load the original CSV file
-        df = pd.read_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/Untitled spreadsheet - Sheet3.csv', 
-                        names=['ID', 'Name', 'Status', 'DateTime'])
+        # Load the original CSV file - use relative path
+        import os
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_file = os.path.join(current_dir, 'Untitled spreadsheet - Sheet3.csv')
+        df = pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime'])
         
         # Convert DateTime to datetime object
         df['DateTime'] = pd.to_datetime(df['DateTime'])
@@ -61,7 +63,10 @@ def load_data():
 def load_work_hours():
     """Load the work hours data"""
     try:
-        return pd.read_csv('/Users/rubeenakhan/Desktop/PYTHON CODE/employee_work_hours.csv')
+        import os
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        work_hours_file = os.path.join(current_dir, 'employee_work_hours.csv')
+        return pd.read_csv(work_hours_file)
     except Exception as e:
         st.error(f"Error loading work hours data: {e}")
         return None
@@ -166,7 +171,7 @@ def main():
                     title="Daily Duty On/Off Activity",
                     color_discrete_map={'DutyOn': '#2E8B57', 'DutyOff': '#DC143C'})
         fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     
     with col2:
         st.subheader("👥 Employee Activity Distribution")
@@ -178,7 +183,7 @@ def main():
                     title="Top 15 Most Active Employees",
                     labels={'x': 'Total Records', 'y': 'Employee'})
         fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     
     # Charts Row 2
     col1, col2 = st.columns(2)
@@ -195,7 +200,7 @@ def main():
                      markers=True,
                      color_discrete_map={'DutyOn': '#2E8B57', 'DutyOff': '#DC143C'})
         fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     
     with col2:
         st.subheader("📆 Day of Week Analysis")
@@ -213,7 +218,7 @@ def main():
                     title="Activity by Day of Week",
                     color_discrete_map={'DutyOn': '#2E8B57', 'DutyOff': '#DC143C'})
         fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     
     # Work Hours Analysis (if available)
     if work_hours_df is not None:
@@ -232,7 +237,7 @@ def main():
                         title="Top 15 Employees by Average Work Hours",
                         labels={'x': 'Average Hours', 'y': 'Employee'})
             fig.update_layout(height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         
         with col2:
             st.subheader("📈 Work Hours Distribution")
@@ -242,7 +247,7 @@ def main():
                              nbins=20,
                              title="Distribution of Daily Work Hours")
             fig.update_layout(height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         
         # Work hours statistics
         col1, col2, col3, col4 = st.columns(4)
@@ -332,7 +337,7 @@ def main():
             
             # Display as DataFrame
             schedule_df = pd.DataFrame(schedule_data)
-            st.dataframe(schedule_df, use_container_width=True)
+            st.dataframe(schedule_df, width='stretch')
             
             # Download button for individual employee data
             csv = schedule_df.to_csv(index=False)
@@ -357,7 +362,7 @@ def main():
                             title=f"Daily Activity for {selected_employee}",
                             color_discrete_map={'DutyOn': '#2E8B57', 'DutyOff': '#DC143C'})
                 fig.update_layout(height=400)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
             
             with col2:
                 st.subheader("🕐 Hourly Activity Pattern")
@@ -371,7 +376,7 @@ def main():
                              markers=True,
                              color_discrete_map={'DutyOn': '#2E8B57', 'DutyOff': '#DC143C'})
                 fig.update_layout(height=400)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
             
             # Work hours trend (if work hours data available)
             if work_hours_df is not None:
@@ -389,7 +394,7 @@ def main():
                                  line_color="red",
                                  annotation_text=f"Average: {employee_work_hours['Work_Hours'].mean():.2f} hours")
                     fig.update_layout(height=400)
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width="stretch")
         else:
             st.warning(f"No data found for {selected_employee} in the selected date range.")
     
@@ -401,7 +406,7 @@ def main():
     
     with tab1:
         st.subheader("Filtered Raw Data")
-        st.dataframe(filtered_df, use_container_width=True)
+        st.dataframe(filtered_df, width="stretch")
         
         # Download button
         csv = filtered_df.to_csv(index=False)
@@ -428,7 +433,7 @@ def main():
         daily_summary['Duty_On_Count'] = daily_summary['Date'].map(duty_on_daily).fillna(0).astype(int)
         daily_summary['Duty_Off_Count'] = daily_summary['Date'].map(duty_off_daily).fillna(0).astype(int)
         
-        st.dataframe(daily_summary, use_container_width=True)
+        st.dataframe(daily_summary, width="stretch")
     
     with tab3:
         st.subheader("Employee Summary")
@@ -447,7 +452,7 @@ def main():
         employee_summary['Duty_On_Count'] = employee_summary['Name'].map(duty_on_emp).fillna(0).astype(int)
         employee_summary['Duty_Off_Count'] = employee_summary['Name'].map(duty_off_emp).fillna(0).astype(int)
         
-        st.dataframe(employee_summary, use_container_width=True)
+        st.dataframe(employee_summary, width="stretch")
 
 if __name__ == "__main__":
     main()
