@@ -1,0 +1,342 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Duty Schedule Dashboard</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .header {
+                text-align: center;
+                color: #333;
+                margin-bottom: 30px;
+                padding: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border-radius: 10px;
+            }
+            .metrics {
+                display: flex;
+                justify-content: space-around;
+                margin: 20px 0;
+                flex-wrap: wrap;
+            }
+            .metric-card {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                text-align: center;
+                margin: 10px;
+                min-width: 150px;
+            }
+            .metric-value {
+                font-size: 2em;
+                font-weight: bold;
+                color: #667eea;
+            }
+            .metric-label {
+                color: #666;
+                margin-top: 5px;
+            }
+            .chart-container {
+                background: white;
+                margin: 20px 0;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .summary-table {
+                background: white;
+                margin: 20px 0;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>📊 Duty Schedule Dashboard</h1>
+            <p>Interactive Analysis of Employee Duty Records</p>
+            <p>Generated on: 2025-11-08 15:30:59</p>
+        </div>
+        
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-value">748</div>
+                <div class="metric-label">Total Records</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">26</div>
+                <div class="metric-label">Unique Employees</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">371</div>
+                <div class="metric-label">Duty On Records</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">377</div>
+                <div class="metric-label">Duty Off Records</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">23</div>
+                <div class="metric-label">Days Tracked</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div id="main-charts"></div>
+        </div>
+        
+        <div class="summary-table">
+            <h3>📋 Employee Summary</h3>
+            <table>
+                <tr>
+                    <th>Employee</th>
+                    <th>Total Records</th>
+                    <th>Duty On</th>
+                    <th>Duty Off</th>
+                    <th>Unique Days</th>
+                </tr>
+    
+                <tr>
+                    <td>akshay</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                </tr>
+        
+                <tr>
+                    <td>angela</td>
+                    <td>30</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+        
+                <tr>
+                    <td>anju</td>
+                    <td>33</td>
+                    <td>17</td>
+                    <td>16</td>
+                    <td>18</td>
+                </tr>
+        
+                <tr>
+                    <td>ashwani</td>
+                    <td>32</td>
+                    <td>16</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>avnisha</td>
+                    <td>25</td>
+                    <td>13</td>
+                    <td>12</td>
+                    <td>13</td>
+                </tr>
+        
+                <tr>
+                    <td>chandan</td>
+                    <td>32</td>
+                    <td>15</td>
+                    <td>17</td>
+                    <td>16</td>
+                </tr>
+        
+                <tr>
+                    <td>chhatarpal</td>
+                    <td>31</td>
+                    <td>16</td>
+                    <td>15</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>fasiuddin</td>
+                    <td>32</td>
+                    <td>16</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>iqrar</td>
+                    <td>33</td>
+                    <td>17</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>kartij</td>
+                    <td>36</td>
+                    <td>18</td>
+                    <td>18</td>
+                    <td>19</td>
+                </tr>
+        
+                <tr>
+                    <td>lahareesh</td>
+                    <td>33</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>loveleen</td>
+                    <td>34</td>
+                    <td>17</td>
+                    <td>17</td>
+                    <td>18</td>
+                </tr>
+        
+                <tr>
+                    <td>manisha</td>
+                    <td>33</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>meekad</td>
+                    <td>30</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+        
+                <tr>
+                    <td>momin</td>
+                    <td>33</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>poonam</td>
+                    <td>33</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>rabiya</td>
+                    <td>33</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>rajesh</td>
+                    <td>14</td>
+                    <td>7</td>
+                    <td>7</td>
+                    <td>7</td>
+                </tr>
+        
+                <tr>
+                    <td>sahil</td>
+                    <td>31</td>
+                    <td>17</td>
+                    <td>14</td>
+                    <td>18</td>
+                </tr>
+        
+                <tr>
+                    <td>sajid</td>
+                    <td>33</td>
+                    <td>17</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>sajid it</td>
+                    <td>31</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>15</td>
+                </tr>
+        
+                <tr>
+                    <td>santhosh</td>
+                    <td>12</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>6</td>
+                </tr>
+        
+                <tr>
+                    <td>shagun</td>
+                    <td>12</td>
+                    <td>4</td>
+                    <td>8</td>
+                    <td>10</td>
+                </tr>
+        
+                <tr>
+                    <td>shilpi</td>
+                    <td>29</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+        
+                <tr>
+                    <td>sohail</td>
+                    <td>33</td>
+                    <td>17</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+        
+                <tr>
+                    <td>soniya</td>
+                    <td>34</td>
+                    <td>17</td>
+                    <td>17</td>
+                    <td>18</td>
+                </tr>
+        
+            </table>
+        </div>
+        
+        <script>
+    var fig = {"data":[{"marker":{"color":"#2E8B57"},"name":"Duty On","x":["2025-10-09","2025-10-10","2025-10-11","2025-10-13","2025-10-14","2025-10-15","2025-10-16","2025-10-17","2025-10-18","2025-10-21","2025-10-22","2025-10-23","2025-10-24","2025-10-25","2025-10-27","2025-10-28","2025-10-29","2025-10-30","2025-10-31"],"y":{"dtype":"i1","bdata":"FxgUExUXFxYKARQSEhUWFRYWFQ=="},"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#DC143C"},"name":"Duty Off","x":["2025-10-09","2025-10-10","2025-10-11","2025-10-13","2025-10-14","2025-10-15","2025-10-16","2025-10-17","2025-10-18","2025-10-21","2025-10-22","2025-10-23","2025-10-24","2025-10-25","2025-10-27","2025-10-28","2025-10-29","2025-10-30","2025-10-31"],"y":{"dtype":"i1","bdata":"FxgTFRYWFhMBExQUEhUXExQWFg=="},"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#4169E1"},"name":"Total Records","orientation":"h","x":{"dtype":"i1","bdata":"JCIiISEhISEhISEhICAg"},"y":["kartij","loveleen","soniya","iqrar","sajid","momin","sohail","poonam","lahareesh","manisha","anju","rabiya","fasiuddin","ashwani","chandan"],"type":"bar","xaxis":"x2","yaxis":"y2"},{"line":{"color":"#2E8B57"},"mode":"lines+markers","name":"Duty On (Hourly)","x":{"dtype":"i4","bdata":"CQAAAAoAAAALAAAA"},"y":{"dtype":"i2","bdata":"ngDNAAgA"},"type":"scatter","xaxis":"x3","yaxis":"y3"},{"line":{"color":"#DC143C"},"mode":"lines+markers","name":"Duty Off (Hourly)","x":{"dtype":"i4","bdata":"DAAAAA0AAAAOAAAADwAAABAAAAARAAAAEgAAABMAAAAUAAAAFQAAAA=="},"y":{"dtype":"i2","bdata":"BgAEAAIAAgADAAMAEABRAQIAAgA="},"type":"scatter","xaxis":"x3","yaxis":"y3"},{"marker":{"color":"#2E8B57"},"name":"Duty On (DoW)","x":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"y":{"dtype":"i1","bdata":"KStBVlUz"},"type":"bar","xaxis":"x4","yaxis":"y4"},{"marker":{"color":"#DC143C"},"name":"Duty Off (DoW)","x":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"y":{"dtype":"i1","bdata":"LDw+V1Mp"},"type":"bar","xaxis":"x4","yaxis":"y4"},{"marker":{"color":"#FF6347"},"name":"Work Hours Distribution","x":{"dtype":"f8","bdata":"16NwPQpXIkApXI\u002fC9agiQOxRuB6F6yJASOF6FK5HIkD2KFyPwnUiQIXrUbgehSFAFK5H4XoUIkAK16NwPQoiQOxRuB6FayJArkfhehSuIkA9CtejcD0iQM3MzMzMTCJAZmZmZmZmIkCPwvUoXI8iQGZmZmZmZiJAPQrXo3A9IkDsUbgehWsiQEjhehSuRyJA16NwPQpXIkAfhetRuJ4iQJqZmZmZGSNAj8L1KFwPIkCamZmZmZkhQBSuR+F6FCJAUrgehevRIUDsUbgehWsiQIXrUbgeBSJASOF6FK7HIkAfhetRuB4iQAAAAAAAgCFAmpmZmZmZIkBSuB6F69EgQKRwPQrXIyJAhetRuB4FIkCPwvUoXI8hQClcj8L1qCFAzczMzMzMIUBxPQrXo3AcQNejcD0KVyFAw\u002fUoXI9CIkC4HoXrUTgiQArXo3A9ChZAFK5H4XoUIkDNzMzMzMwhQEjhehSuRyJAH4XrUbgeIkDsUbgehesiQOF6FK5H4SJAKVyPwvWoIkBmZmZmZmYiQM3MzMzMzApAmpmZmZmZD0Bcj8L1KFwiQClcj8L1qCJA7FG4HoXrIkD2KFyPwvUiQAAAAAAAgCJAw\u002fUoXI\u002fCIkBI4XoUrkciQNejcD0KVyJAw\u002fUoXI9CIkApXI\u002fC9SgiQKRwPQrXoyJAmpmZmZkZI0CPwvUoXA8iQD0K16NwvSFAcT0K16NwIkCPwvUoXA8iQOxRuB6FayJAhetRuB4FIkAfhetRuB4iQBSuR+F6lCJAuB6F61E4IkCF61G4HgUiQPYoXI\u002fCdSFAPQrXo3A9IUDhehSuR+EhQFyPwvUoXCFA7FG4HoXrIUBSuB6F69EhQJqZmZmZmSFAPQrXo3C9IUBcj8L1KFwhQKRwPQrXoyFArkfhehQuIkBI4XoUrschQEjhehSuRyJACtejcD2KI0AK16NwPYoiQBSuR+F6lCJAH4XrUbieIUBxPQrXo3AiQIXrUbgehSJAj8L1KFwPIkAUrkfhehQiQFK4HoXr0SFASOF6FK5HIkAAAAAAAIAhQOF6FK5H4SFAhetRuB6FIkCkcD0K1yMkQJqZmZmZmR9A16NwPQrXIEDNzMzMzEwhQHsUrkfheiFA9ihcj8J1IUCamZmZmZkhQB+F61G4niFAPQrXo3A9IUDD9Shcj8IhQEjhehSuRyFA7FG4HoVrIUBI4XoUrkchQGZmZmZmZiFASOF6FK5HIUAzMzMzM7MhQBSuR+F6FCFAhetRuB4FIkAAAAAAAAAiQBSuR+F6FCJAcT0K16PwIUAAAAAAAIAhQMP1KFyPwiFAXI\u002fC9SjcIUDhehSuR2EhQJqZmZmZmSFACtejcD0KIkBcj8L1KNwhQArXo3A9CiJAKVyPwvUoIkAAAAAAAAAiQI\u002fC9ShcDyJACtejcD0KIkAUrkfhehQiQOF6FK5HYSJAmpmZmZmZIkBI4XoUrkciQOxRuB6FayJAXI\u002fC9ShcIkCuR+F6FK4hQPYoXI\u002fC9SZArkfhehQuIkBmZmZmZuYhQBSuR+F6lCFApHA9CtcjIkAUrkfhehQiQD0K16NwvSFAj8L1KFwPIkDD9Shcj0IiQBSuR+F6FCJAUrgehetRIkCkcD0K16MjQGZmZmZmZiJAH4XrUbgeIkAK16NwPYohQI\u002fC9ShcjyJA16NwPQpXIkBSuB6F61EeQK5H4XoULiJAH4XrUbgeIkA9CtejcD0iQD0K16NwPSJAMzMzMzMzIkCuR+F6FC4iQM3MzMzMzAxAKVyPwvUoIkBI4XoUrkciQBSuR+F6FCJAmpmZmZkZIkAAAAAAAIAhQGZmZmZmZiJAexSuR+H6IUCPwvUoXI8hQD0K16NwPSJAMzMzMzMzIkDXo3A9CtchQBSuR+F6FCJAhetRuB4FIkAK16NwPQoiQPYoXI\u002fC9SFApHA9CtcjIkA9CtejcD0iQM3MzMzMTCJASOF6FK5HIkApXI\u002fC9aghQNejcD0K1yJA16NwPQpXIkBcj8L1KFwiQLgehetROCJAcT0K16PwIEBSuB6F61EjQGZmZmZmZhRAhetRuB6FIkAzMzMzM7MhQJqZmZmZmSJAhetRuB6FIUBcj8L1KNwiQLgehetRuCJAj8L1KFyPIkDhehSuR+EiQPYoXI\u002fCdSFA4XoUrkfhG0BSuB6F69EiQI\u002fC9ShcDyFAmpmZmZkZIkAfhetRuB4iQJqZmZmZGSJAhetRuB4FIkDNzMzMzEwiQDMzMzMzMyJAAAAAAACAIkDD9Shcj0IiQEjhehSuxyFAmpmZmZmZFkCkcD0K1yMjQBSuR+F6FAZAhetRuB4FIkDsUbgeheshQGZmZmZmZiJA16NwPQrXIEAUrkfhehQjQDMzMzMzMyNA7FG4HoVrIkDhehSuR+EiQArXo3A9CiNACtejcD0KIkDXo3A9CtciQArXo3A9CiJAZmZmZmZmI0C4HoXrUbgiQI\u002fC9ShcjyJA16NwPQrXIkD2KFyPwnUhQOF6FK5H4RtAUrgehevRIkAK16NwPQohQBSuR+F6FCJAH4XrUbgeIkCamZmZmRkiQAAAAAAAACJAzczMzMxMIkCuR+F6FC4iQAAAAAAAgCJAw\u002fUoXI9CIkAzMzMzMzMiQM3MzMzMzCJAXI\u002fC9SjcIkCF61G4HoUhQGZmZmZmZiJAZmZmZmbmIUCF61G4HgUiQB+F61G4HiJAUrgehetRIkCPwvUoXA8iQAAAAAAAgCJAmpmZmZmZIUCPwvUoXA8iQOF6FK5HYSFACtejcD0KIkBmZmZmZuYhQOxRuB6F6yFAzczMzMzMIUCPwvUoXI8iQOxRuB6F6yFAcT0K16PwIEAzMzMzMzMiQHE9CtejcCBA4XoUrkdhIUDD9Shcj8IgQGZmZmZmZiFAMzMzMzMzIUCPwvUoXA8kQNejcD0K1yBApHA9CtejIUAzMzMzMzMkQKRwPQrXowBAj8L1KFyPIkAUrkfhehQjQClcj8L1qCFAzczMzMxMIkD2KFyPwnUiQK5H4XoULiJApHA9CtcjIUAUrkfhehQiQClcj8L1KCJA9ihcj8J1IkApXI\u002fC9agiQMP1KFyPQiJA16NwPQpXIkCkcD0K16MiQDMzMzMzMyJAcT0K16NwIkAK16NwPQoiQFK4HoXr0SFA7FG4HoVrIUDsUbgehWsiQIXrUbgehSFAMzMzMzMzIkCkcD0K1yMmQOxRuB6F6yBA16NwPQrXD0AK16NwPQojQD0K16NwvSNAmpmZmZkZJEC4HoXrUbgjQOxRuB6F6yBAMzMzMzMzI0CPwvUoXI8jQLgehetRuCNArkfhehSuI0AAAAAAAAAkQI\u002fC9ShcjyFAZmZmZmZmI0Bcj8L1KFwjQNejcD0K1yBA7FG4HoVrIkApXI\u002fC9SgiQJqZmZmZmSFApHA9CtcjIUBxPQrXo3AgQPYoXI\u002fC9SJAH4XrUbgeH0DNzMzMzEwjQDMzMzMzsyJAUrgehetRIkCkcD0K1yMiQDMzMzMzMyJACtejcD2KIkDhehSuR2EiQFyPwvUo3CFAZmZmZmZmIkBxPQrXo\u002fAjQArXo3A9CiNAj8L1KFyPIkCamZmZmZkiQB+F61G4niNAcT0K16PwIkAK16NwPYokQJqZmZmZmSJA7FG4HoXrIkDsUbgehesjQNejcD0K1yJAH4XrUbgeI0CF61G4HoUiQPYoXI\u002fC9SJAw\u002fUoXI\u002fCI0A="},"type":"histogram","xaxis":"x5","yaxis":"y5"},{"marker":{"color":"#32CD32"},"name":"Avg Work Hours","orientation":"h","x":{"dtype":"f8","bdata":"sRM7sRM7I0AVrkfheiQjQD4K16NwvSJApHA9CtejIkAzMzMzM2siQGPJL5b8YiJAoF1AbCpNIkA4RjDR30kiQOIrvuIrPiJAa3ljBBM9IkCDwMqhRTYiQML1KFyPCiJAhetRuB4FIkDS8elriwMiQGZmZmZm\u002fiFA"},"y":["shilpi","soniya","santhosh","akshay","lahareesh","fasiuddin","chandan","angela","rajesh","anju","sajid it","manisha","rabiya","sahil","momin"],"type":"bar","xaxis":"x6","yaxis":"y6"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.45]},"yaxis":{"anchor":"x","domain":[0.7777777777777778,1.0]},"xaxis2":{"anchor":"y2","domain":[0.55,1.0]},"yaxis2":{"anchor":"x2","domain":[0.7777777777777778,1.0]},"xaxis3":{"anchor":"y3","domain":[0.0,0.45]},"yaxis3":{"anchor":"x3","domain":[0.3888888888888889,0.6111111111111112]},"xaxis4":{"anchor":"y4","domain":[0.55,1.0]},"yaxis4":{"anchor":"x4","domain":[0.3888888888888889,0.6111111111111112]},"xaxis5":{"anchor":"y5","domain":[0.0,0.45]},"yaxis5":{"anchor":"x5","domain":[0.0,0.22222222222222224]},"xaxis6":{"anchor":"y6","domain":[0.55,1.0]},"yaxis6":{"anchor":"x6","domain":[0.0,0.22222222222222224]},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Daily Activity","x":0.225,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Top 15 Active Employees","x":0.775,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Hourly Pattern","x":0.225,"xanchor":"center","xref":"paper","y":0.6111111111111112,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Day of Week Activity","x":0.775,"xanchor":"center","xref":"paper","y":0.6111111111111112,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Work Hours Distribution","x":0.225,"xanchor":"center","xref":"paper","y":0.22222222222222224,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Average Work Hours by Employee","x":0.775,"xanchor":"center","xref":"paper","y":0.22222222222222224,"yanchor":"bottom","yref":"paper"}],"title":{"font":{"size":24},"text":"Duty Schedule Dashboard","x":0.5},"height":1200,"showlegend":true}};
+            Plotly.newPlot('main-charts', fig.data, fig.layout);
+        </script>
+    </body>
+    </html>
+    
