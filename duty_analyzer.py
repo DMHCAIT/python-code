@@ -6,9 +6,13 @@ def analyze_duty_schedule(csv_file_path):
     """
     Analyze duty schedule from CSV file and organize by date and person
     """
-    # Read the CSV file
-    print("Reading CSV file...")
-    df = pd.read_csv(csv_file_path, names=['ID', 'Name', 'Status', 'DateTime'])
+    # Read the CSV file(s)
+    print("Reading CSV file(s)...")
+    if isinstance(csv_file_path, (list, tuple)):
+        parts = [pd.read_csv(p, names=['ID', 'Name', 'Status', 'DateTime']) for p in csv_file_path]
+        df = pd.concat(parts, ignore_index=True)
+    else:
+        df = pd.read_csv(csv_file_path, names=['ID', 'Name', 'Status', 'DateTime'])
     
     # Convert DateTime to datetime object
     df['DateTime'] = pd.to_datetime(df['DateTime'])
@@ -183,12 +187,14 @@ def create_csv_reports(df):
         print("✅ Created: employee_work_hours.csv")
 
 if __name__ == "__main__":
-    import os
+    import os, glob
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_file_path = os.path.join(current_dir, "Untitled spreadsheet - Sheet3.csv")
-    
-    if os.path.exists(csv_file_path):
-        analyze_duty_schedule(csv_file_path)
+    pattern = os.path.join(current_dir, 'Untitled spreadsheet - Sheet*.csv')
+    files = sorted(glob.glob(pattern))
+    if not files:
+        print(f"Error: No input CSV files found matching {pattern}")
+    else:
+        analyze_duty_schedule(files)
         print("\n" + "="*80)
         print("ANALYSIS COMPLETE!")
         print("="*80)
@@ -197,5 +203,3 @@ if __name__ == "__main__":
         print("- duty_schedule_by_date.csv") 
         print("- daily_duty_summary.csv")
         print("- employee_work_hours.csv")
-    else:
-        print(f"Error: File not found at {csv_file_path}")

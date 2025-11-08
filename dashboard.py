@@ -41,11 +41,18 @@ st.markdown("""
 def load_data():
     """Load and process the duty schedule data"""
     try:
-        # Load the original CSV file - use relative path
-        import os
+        # Load all matching CSV files (support multiple Untitled spreadsheet files)
+        import os, glob
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_file = os.path.join(current_dir, 'Untitled spreadsheet - Sheet3.csv')
-        df = pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime'])
+        pattern = os.path.join(current_dir, 'Untitled spreadsheet - Sheet*.csv')
+        files = sorted(glob.glob(pattern))
+        if not files:
+            raise FileNotFoundError(f"No CSV files found matching: {pattern}")
+
+        parts = []
+        for csv_file in files:
+            parts.append(pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime']))
+        df = pd.concat(parts, ignore_index=True)
         
         # Convert DateTime to datetime object
         df['DateTime'] = pd.to_datetime(df['DateTime'])
@@ -66,6 +73,8 @@ def load_work_hours():
         import os
         current_dir = os.path.dirname(os.path.abspath(__file__))
         work_hours_file = os.path.join(current_dir, 'employee_work_hours.csv')
+        if not os.path.exists(work_hours_file):
+            return None
         return pd.read_csv(work_hours_file)
     except Exception as e:
         st.error(f"Error loading work hours data: {e}")

@@ -8,11 +8,18 @@ from datetime import datetime
 def create_html_dashboard():
     """Create an HTML dashboard with interactive charts"""
     
-    # Load data - use relative paths
-    import os
+    # Load data - use relative paths and support multiple input CSVs
+    import os, glob
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_file = os.path.join(current_dir, 'Untitled spreadsheet - Sheet3.csv')
-    df = pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime'])
+    pattern = os.path.join(current_dir, 'Untitled spreadsheet - Sheet*.csv')
+    files = sorted(glob.glob(pattern))
+    if not files:
+        raise FileNotFoundError(f"No CSV files found matching: {pattern}")
+
+    parts = []
+    for csv_file in files:
+        parts.append(pd.read_csv(csv_file, names=['ID', 'Name', 'Status', 'DateTime']))
+    df = pd.concat(parts, ignore_index=True)
     
     # Convert DateTime to datetime object
     df['DateTime'] = pd.to_datetime(df['DateTime'])
